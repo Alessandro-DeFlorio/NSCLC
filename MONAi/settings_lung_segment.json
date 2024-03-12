@@ -1,0 +1,12 @@
+{
+    "input_dir": "D:\\nsclc\\tcia\\Rider",
+    "output_dir": "D:\\nsclc\\data\\nnUNet_raw\\Dataset002_Rid\\segment_lung",
+    "model_path": "C:\\Users\\aless\\Desktop\\git\\NSCLC\\MONAi\\wholeBody_ct_segmentation\\models\\model_lowres.pt",
+    "config_path": "C:\\Users\\aless\\Desktop\\git\\NSCLC\\MONAi\\wholeBody_ct_segmentation\\configs\\inference.json",
+    "prefix": "R01-",
+    "num_digits": 3,
+    "separate_seg": true,
+    "suffix": "S",
+    "print_treshold": 0
+}
+  
