@@ -91,8 +91,9 @@ call nnUNetv2_train 3 3d_lowres 4 -device cuda
 
 call nnUNetv2_find_best_configuration 3 -c 3d_lowres
 
-call nnUNetv2_predict -d Dataset001_Apm -i D:\nsclc\data\nnUNet_raw\Dataset001_Apm\imagesTs -o D:\nsclc\data\nnUNet_raw\Dataset001_Apm\outputTs -f  0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
-call nnUNetv2_apply_postprocessing -i D:\script_di_ale\output\lungMask -o D:\script_di_ale\output\lungMaskPP -pp_pkl_file D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\postprocessing.pkl -np 8 -plans_json D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\plans.json
+nnUNetv2_predict -d Dataset003_Lung -i D:\script_di_ale\output\imagesTr -o D:\script_di_ale\output\lungMask -f  0 1 2 3 4 -tr nnUNetTrainer -c 3d_lowres -p nnUNetPlans
 
-call nnUNetv2_predict -d Dataset001_Apm -i D:\nsclc\data\nnUNet_raw\Dataset003_Lung\imagesTr -o D:\nsclc\data\nnUNet_raw\Dataset003_Lung\outputTs -f  0 -tr nnUNetTrainer -c 3d_lowres -p nnUNetPlans
+***Once inference is completed, run postprocessing like this:***
+
+nnUNetv2_apply_postprocessing -i D:\script_di_ale\output\lungMask -o D:\script_di_ale\output\lungMaskPP -pp_pkl_file D:/NSCLC/data/nnUNet_results\Dataset003_Lung\nnUNetTrainer__nnUNetPlans__3d_lowres\crossval_results_folds_0_1_2_3_4\postprocessing.pkl -np 8 -plans_json D:/NSCLC/data/nnUNet_results\Dataset003_Lung\nnUNetTrainer__nnUNetPlans__3d_lowres\crossval_results_folds_0_1_2_3_4\plans.json
 
