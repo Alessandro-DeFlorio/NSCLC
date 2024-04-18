@@ -81,18 +81,18 @@ set nnUNet_raw=D:/NSCLC/data/nnUNet_raw
 set nnUNet_preprocessed=D:/NSCLC/data/nnUNet_preprocessed
 set nnUNet_results=D:/NSCLC/data/nnUNet_results
 
-call nnUNetv2_plan_and_preprocess -d 4 --verify_dataset_integrity
+call nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity
 
-call nnUNetv2_train 4 2d 0 -device cuda
-call nnUNetv2_train 4 2d 1 -device cuda
-call nnUNetv2_train 4 2d 2 -device cuda
-call nnUNetv2_train 4 2d 3 -device cuda
-call nnUNetv2_train 4 2d 4 -device cuda
+call nnUNetv2_train 3 3d_lowres 0 -device cuda
+call nnUNetv2_train 3 3d_lowres 1 -device cuda
+call nnUNetv2_train 3 3d_lowres 2 -device cuda
+call nnUNetv2_train 3 3d_lowres 3 -device cuda
+call nnUNetv2_train 3 3d_lowres 4 -device cuda
 
-call nnUNetv2_find_best_configuration 4 -c 2d
+call nnUNetv2_find_best_configuration 3 -c 3d_lowres
 
 call nnUNetv2_predict -d Dataset001_Apm -i D:\nsclc\data\nnUNet_raw\Dataset001_Apm\imagesTs -o D:\nsclc\data\nnUNet_raw\Dataset001_Apm\outputTs -f  0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
-call nnUNetv2_apply_postprocessing -i D:\nsclc\data\nnUNet_raw\Dataset001_Apm\outputTs -o D:\nsclc\data\nnUNet_raw\Dataset001_Apm\outputTsPP -pp_pkl_file D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\postprocessing.pkl -np 8 -plans_json D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\plans.json
+call nnUNetv2_apply_postprocessing -i D:\script_di_ale\output\lungMask -o D:\script_di_ale\output\lungMaskPP -pp_pkl_file D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\postprocessing.pkl -np 8 -plans_json D:/NSCLC/data/nnUNet_results\Dataset001_Apm\nnUNetTrainer__nnUNetPlans__2d\crossval_results_folds_0_1_2_3_4\plans.json
 
-
+call nnUNetv2_predict -d Dataset001_Apm -i D:\nsclc\data\nnUNet_raw\Dataset003_Lung\imagesTr -o D:\nsclc\data\nnUNet_raw\Dataset003_Lung\outputTs -f  0 -tr nnUNetTrainer -c 3d_lowres -p nnUNetPlans
 
